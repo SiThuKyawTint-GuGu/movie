@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('summary');
             $table->string('cover_image')->nullable();
             $table->string('imdb_ratings')->nullable();
-            $table->string('pdf_download_links')->nullable();
+            $table->string('pdf_download_link')->nullable();
             $table->string('publish_status')->default(1);
             $table->timestamps();
         });

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MovieThumbnail extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'movie_id','image'
+    ];
+
 }
