@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\v1\AuthController;
+use App\Http\Controllers\Api\v1\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function () {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/profile', [AuthController::class, 'detail']);
+
+    Route::middleware('auth:api')->group(function () {
+        /*
+        |--------------------------------------------------------------------------
+        | Authentication
+        |--------------------------------------------------------------------------
+        */
+        Route::post('/logout', [AuthController::class, 'logout']);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Users
+        |--------------------------------------------------------------------------
+        */
+        Route::prefix('users')->group(function () {
+
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Movies
+        |--------------------------------------------------------------------------
+        */
+        Route::prefix('movies')
+            ->controller(MovieController::class)
+            ->group(function () {
+                Route::get('/','list');
+                Route::post('/','create');
+                Route::put('/{id}','update');
+                Route::get('/{id}','detail');
+                Route::delete('/{id}','destroy');
+            });
+    });
+
 });
