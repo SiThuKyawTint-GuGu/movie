@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\AuthController;
+use App\Http\Controllers\Api\v1\AuthorController;
+use App\Http\Controllers\Api\v1\GenresController;
 use App\Http\Controllers\Api\v1\MovieController;
+use App\Http\Controllers\Api\v1\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,46 +20,34 @@ use App\Http\Controllers\Api\v1\MovieController;
 
 Route::prefix('v1')->group(function () {
 
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication
-    |--------------------------------------------------------------------------
-    */
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::get('/profile', [AuthController::class, 'detail']);
 
     Route::middleware('auth:api')->group(function () {
-        /*
-        |--------------------------------------------------------------------------
-        | Authentication
-        |--------------------------------------------------------------------------
-        */
+
         Route::post('/logout', [AuthController::class, 'logout']);
 
-        /*
-        |--------------------------------------------------------------------------
-        | Users
-        |--------------------------------------------------------------------------
-        */
         Route::prefix('users')->group(function () {
 
         });
 
-        /*
-        |--------------------------------------------------------------------------
-        | Movies
-        |--------------------------------------------------------------------------
-        */
-        Route::prefix('movies')
-            ->controller(MovieController::class)
-            ->group(function () {
-                Route::get('/','list');
-                Route::post('/','create');
-                Route::put('/{id}','update');
-                Route::get('/{id}','detail');
-                Route::delete('/{id}','destroy');
-            });
+        Route::prefix('movies')->controller(MovieController::class)->group(function () {
+            Route::post('/create','store');
+            Route::post('/update','update');
+            Route::delete('/destory','destroy');
+        });
+
+        Route::prefix('authors')->controller(AuthorController::class)->group(function () {
+            Route::post('/create', 'store');
+        });
+        Route::prefix('genres')->controller(GenresController::class)->group(function () {
+            Route::post('/create', 'store');
+        });
+        Route::prefix('tags')->controller(TagController::class)->group(function () {
+            Route::post('/create', 'store');
+        });
+
     });
 
 });

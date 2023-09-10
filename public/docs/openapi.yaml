@@ -1,0 +1,141 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/login:
+    post:
+      summary: ''
+      operationId: postApiV1Login
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must be at least 5 characters. Must not be greater than 20 characters.'
+                  example: xander02@example.com
+                password:
+                  type: string
+                  description: ''
+                  example: nemo
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/register:
+    post:
+      summary: ''
+      operationId: postApiV1Register
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be at least 3 characters. Must not be greater than 255 characters.'
+                  example: uswydb
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must be at least 5 characters.'
+                  example: ckoch@example.org
+                password:
+                  type: string
+                  description: 'Must contain only letters and numbers. Must be at least 8 characters. Must not be greater than 255 characters.'
+                  example: "d#ze'4ve<PxVGl<+"
+                image:
+                  type: string
+                  description: ''
+                  example: null
+                is_banned:
+                  type: string
+                  description: ''
+                  example: null
+              required:
+                - name
+                - email
+                - password
+      security: []
+  /api/v1/profile:
+    get:
+      summary: ''
+      operationId: getApiV1Profile
+      description: ''
+      parameters: []
+      responses:
+        204:
+          description: ''
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/logout:
+    post:
+      summary: ''
+      operationId: postApiV1Logout
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/movies/create:
+    post:
+      summary: ''
+      operationId: postApiV1MoviesCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/authors/create:
+    post:
+      summary: ''
+      operationId: postApiV1AuthorsCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be at least 3 characters. Must not be greater than 255 characters.'
+                  example: urfxkzbxlbqfr
+                image:
+                  type: string
+                  description: ''
+                  example: null
+              required:
+                - name
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''

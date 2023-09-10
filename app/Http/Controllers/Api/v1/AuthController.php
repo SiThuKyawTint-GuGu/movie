@@ -14,7 +14,6 @@ use App\Http\Resources\Api\v1\users\UserDetailResource;
 
 class AuthController extends Controller
 {
-
     use ApiResponser;
 
     public function login(UserLoginRequest $request)
@@ -34,9 +33,9 @@ class AuthController extends Controller
             return $this->errorResponse( 'Crediantials do not match',401);
 
         return response()->json([
+            'data' => new UserResource($user),
             'success' => true,
             'token' => $user->createToken('My App')->accessToken,
-            'data' => new UserResource($user)
         ], 200);
 
     }
@@ -52,9 +51,9 @@ class AuthController extends Controller
         $user = User::create($data);
 
         return response()->json([
+            'data' => new UserResource($user),
             'success' => true,
             'token' => $user->createToken('My App')->accessToken,
-            'data' => new UserResource($user),
         ], 200);
 
     }
@@ -80,7 +79,8 @@ class AuthController extends Controller
         return [
             'name'     => $request->name,
             'email'    => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'image'    => $request->file('image') ? $request->file('image')->store('images') : null,
         ];
     }
 }
