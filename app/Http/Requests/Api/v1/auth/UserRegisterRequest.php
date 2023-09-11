@@ -25,7 +25,7 @@ class UserRegisterRequest extends FormRequest
             'name'     => 'required|min:3|max:255',
             'email'    => 'required|min:5|email|unique:users,email',
             'password' => 'required|confirmed|min:8|max:255|alpha_num',
-            'image' => 'nullable|mimes:jpg,png,webp',
+            'image'    => 'nullable',
             'is_banned'=> 'nullable',
         ];
     }

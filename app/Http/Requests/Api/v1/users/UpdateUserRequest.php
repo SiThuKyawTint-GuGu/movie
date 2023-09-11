@@ -31,7 +31,7 @@ class UpdateUserRequest extends FormRequest
                 'email',
                 Rule::unique('users', 'email')->ignore($this->id, 'user_id'),
             ],
-            'role_ids' => ['required','json',new ValidateRoleIds()],
+            'role_ids' => ['required', 'json', new ValidateRoleIds()],
             'staff_id' => 'nullable|exists:staff,staff_id',
             'flag'     => 'required|string|max:255'
         ];

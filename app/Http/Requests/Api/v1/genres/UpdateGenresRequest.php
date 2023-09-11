@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\v1\author;
+namespace App\Http\Requests\Api\v1\genres;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +23,7 @@ class UpdateGenresRequest extends FormRequest
     {
         return [
             'name'     => 'required|min:3|max:255',
-            'image'    => 'nullable|mimes:jpg,png,webp',
+            'image'    => 'nullable',
         ];
     }
 }

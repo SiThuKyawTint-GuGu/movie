@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Image;
 use App\Models\Movie;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,10 @@ class Author extends Model
 
     protected $fillable = [
         'name','image'
+    ];
+
+    protected $casts    = [
+        'image' => Image::class,
     ];
 
     public function movies(){

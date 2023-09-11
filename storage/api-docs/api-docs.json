@@ -1,0 +1,790 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "LARAVEL Rest API DOCUMENTATION",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "manirujjamanakash@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Auth Login",
+                "description": "Auth Login",
+                "operationId": "eaf28e54bd4a4126b9668fe26e6d1411",
+                "requestBody": {
+                    "description": "User objects",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "description": "email",
+                                        "type": "string",
+                                        "example": "gugu@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "sithuadmin"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register",
+                "description": "Register",
+                "operationId": "a3f252b10cbf8e270739c3ada00c6042",
+                "requestBody": {
+                    "description": "User objects",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "gugu"
+                                    },
+                                    "email": {
+                                        "description": "email",
+                                        "type": "string",
+                                        "example": "gugu@gmail.com"
+                                    },
+                                    "password": {
+                                        "description": "password",
+                                        "type": "string",
+                                        "example": "guguadmin"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "password_confirmation",
+                                        "type": "string",
+                                        "example": "guguadmin"
+                                    },
+                                    "image": {
+                                        "description": "image",
+                                        "type": "file",
+                                        "example": "image"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/authors": {
+            "post": {
+                "tags": [
+                    "Author"
+                ],
+                "summary": "Author Create",
+                "description": "Create Author",
+                "operationId": "a09ac23bcc5fa7f6a449f478cdbefa44",
+                "requestBody": {
+                    "description": "Author objects",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "love"
+                                    },
+                                    "image": {
+                                        "description": "image",
+                                        "type": "file",
+                                        "example": "image"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/comments": {
+            "post": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Comment Create",
+                "description": "Create Comment",
+                "operationId": "917b06c80f173dc9400c056742570b45",
+                "requestBody": {
+                    "description": "Comment objects",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "movie_id": {
+                                        "description": "movie_id",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "comment": {
+                                        "description": "comment",
+                                        "type": "string",
+                                        "example": "good"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/comments/list": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Get Comment",
+                "description": "Get Comment",
+                "operationId": "bea1468e48f7ab9b49c2f475735c9d6e",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/genres": {
+            "post": {
+                "tags": [
+                    "Genres"
+                ],
+                "summary": "Genres Create",
+                "description": "Create Genres",
+                "operationId": "6c397d14bf9a3b5783a58f81cdfd3697",
+                "requestBody": {
+                    "description": "Genres objects",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "Action"
+                                    },
+                                    "image": {
+                                        "description": "image",
+                                        "type": "file",
+                                        "example": "image"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movies/{id}": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Get Detail",
+                "description": "Get Detail",
+                "operationId": "03fb9b29d3c7a8089f4b5c1d693c3172",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "movie id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Movie Update",
+                "description": "Update Movie",
+                "operationId": "cbe81c76a99cad2d227684e276a91c6f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "movie id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Movie objects",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "title",
+                                        "type": "string",
+                                        "example": "love"
+                                    },
+                                    "summary": {
+                                        "description": "summary",
+                                        "type": "string",
+                                        "example": "about fight"
+                                    },
+                                    "cover_image": {
+                                        "description": "cover_image",
+                                        "type": "file",
+                                        "example": "image"
+                                    },
+                                    "imdb_ratings": {
+                                        "description": "imdb_ratings",
+                                        "type": "string",
+                                        "example": "9"
+                                    },
+                                    "publish_status": {
+                                        "description": "publish_status",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "pdf_download_link": {
+                                        "description": "pdf_download_link",
+                                        "type": "string",
+                                        "example": "www.google.com"
+                                    },
+                                    "genre_ids": {
+                                        "description": "genre_ids",
+                                        "type": "string",
+                                        "example": "[1,2]"
+                                    },
+                                    "tag_ids": {
+                                        "description": "tag_ids",
+                                        "type": "string",
+                                        "example": "[1,2]"
+                                    },
+                                    "author_ids": {
+                                        "description": "author_ids",
+                                        "type": "string",
+                                        "example": "[1]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Delete",
+                "description": "Delete",
+                "operationId": "0f4a98c2e92b423a382c24e562063d0e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Movie id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Successfully Deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Level not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movies/related-movies/{id}": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Get relatedMovie",
+                "description": "Get relatedMovie",
+                "operationId": "fefbc4c7c5ce8ba212576503673852b2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "movie id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/movies": {
+            "get": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Get MovieList",
+                "description": "Get MovieList",
+                "operationId": "1370ed35be39cf7de2c9fb83b00118d2",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "description": "limit",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Movie"
+                ],
+                "summary": "Movie Create",
+                "description": "Create Movie",
+                "operationId": "add6773ac03f9fab7aac9eb459ee960b",
+                "requestBody": {
+                    "description": "Movie objects",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "title",
+                                        "type": "string",
+                                        "example": "love"
+                                    },
+                                    "summary": {
+                                        "description": "summary",
+                                        "type": "string",
+                                        "example": "about fight"
+                                    },
+                                    "cover_image": {
+                                        "description": "cover_image",
+                                        "type": "file",
+                                        "example": "image"
+                                    },
+                                    "imdb_ratings": {
+                                        "description": "imdb_ratings",
+                                        "type": "string",
+                                        "example": "9"
+                                    },
+                                    "publish_status": {
+                                        "description": "publish_status",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "pdf_download_link": {
+                                        "description": "pdf_download_link",
+                                        "type": "string",
+                                        "example": "www.google.com"
+                                    },
+                                    "genre_ids": {
+                                        "description": "genre_ids",
+                                        "type": "string",
+                                        "example": "[1,2]"
+                                    },
+                                    "tag_ids": {
+                                        "description": "tag_ids",
+                                        "type": "string",
+                                        "example": "[1,2]"
+                                    },
+                                    "author_ids": {
+                                        "description": "author_ids",
+                                        "type": "string",
+                                        "example": "[1]"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/tags": {
+            "post": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Tag Create",
+                "description": "Create Tag",
+                "operationId": "0d9df0f66a11842e78b4e83215326f06",
+                "requestBody": {
+                    "description": "Tags objects",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "name",
+                                        "type": "string",
+                                        "example": "love"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": "Enter your bearer token in the format `Bearer {token}`"
+            }
+        }
+    }
+}

@@ -11,6 +11,50 @@ use App\Http\Requests\Api\v1\author\UpdateAuthorRequest;
 class AuthorController extends Controller
 {
     use ApiResponser;
+
+    /**
+     * @OA\POST(
+     *     path="/api/v1/authors",
+     *     tags={"Author"},
+     *     summary="Author Create",
+     *     description="Create Author",
+     *     security={{"bearer_token":{}}},
+     *     @OA\RequestBody(
+     *         description="Author objects",
+     *         required=true,
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data", 
+     *            @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(
+     *                     property="name",
+     *                     description="name",
+     *                     type="string",
+     *                     example="love"
+     *                 ),
+     *                 @OA\Property(
+     *                     property="image",
+     *                     description="image",
+     *                     type="file",
+     *                     example="image"
+     *                 ),
+     *             )
+     *         ),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *   @OA\JsonContent()
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid input",
+     *   @OA\JsonContent()
+     *     )
+     * )
+     */
+
+
     public function store(UpdateAuthorRequest $request)
     {
         $data = $this->getRequestData($request);

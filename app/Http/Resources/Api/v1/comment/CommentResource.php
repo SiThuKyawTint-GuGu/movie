@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Api\v1\author;
+namespace App\Http\Resources\Api\v1\comment;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AuthorResource extends JsonResource
+class CommentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,10 +14,6 @@ class AuthorResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'image' => $this->image,
-        ];
+        return parent::toArray($request);
     }
 }

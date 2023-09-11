@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TagSeeder extends Seeder
 {
@@ -14,6 +15,33 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $data = [
+            [
+                'name'       => "Tag 1",
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name'       => "Tag 2",
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name'       => "Tag 3",
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name'       => "Tag 4",
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name'       => "Tag 5",
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ];
+        Tag::insert($data);
     }
 }

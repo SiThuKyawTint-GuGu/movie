@@ -30,7 +30,7 @@ class ValidateTagIds implements Rule
         if (!is_array($tagIds))
             return false;
 
-        if (Tag::whereIn('id', $$tagIds)->count() !== count($tagIds))
+        if (Tag::whereIn('id', $tagIds)->count() !== count($tagIds))
             return false;
 
         return true;

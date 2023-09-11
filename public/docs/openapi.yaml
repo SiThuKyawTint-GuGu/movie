@@ -7,6 +7,40 @@ servers:
   -
     url: 'http://localhost'
 paths:
+  /api/documentation:
+    get:
+      summary: 'Display Swagger API page.'
+      operationId: displaySwaggerAPIPage
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Movie API</title>\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"http://localhost/docs/asset/swagger-ui.css?v=c9a0b360b746f3f8a36a51e9f57e8d27\">\n    <link rel=\"icon\" type=\"image/png\" href=\"http://localhost/docs/asset/favicon-32x32.png?v=40d4f2c38d1cd854ad463f16373cbcb6\" sizes=\"32x32\"/>\n    <link rel=\"icon\" type=\"image/png\" href=\"http://localhost/docs/asset/favicon-16x16.png?v=f0ae831196d55d8f4115b6c5e8ec5384\" sizes=\"16x16\"/>\n    <style>\n    html\n    {\n        box-sizing: border-box;\n        overflow: -moz-scrollbars-vertical;\n        overflow-y: scroll;\n    }\n    *,\n    *:before,\n    *:after\n    {\n        box-sizing: inherit;\n    }\n\n    body {\n      margin:0;\n      background: #fafafa;\n    }\n    </style>\n</head>\n\n<body>\n<div id=\"swagger-ui\"></div>\n\n<script src=\"http://localhost/docs/asset/swagger-ui-bundle.js?v=341c07c1d0cf4f07a83315d30e1cbc36\"></script>\n<script src=\"http://localhost/docs/asset/swagger-ui-standalone-preset.js?v=9fb5922178409fa3e7f14d89f85c59a0\"></script>\n<script>\n    window.onload = function() {\n        // Build a system\n        const ui = SwaggerUIBundle({\n            dom_id: '#swagger-ui',\n            url: \"http://localhost/docs/api-docs.json\",\n            operationsSorter: null,\n            configUrl: null,\n            validatorUrl: null,\n            oauth2RedirectUrl: \"http://localhost/api/oauth2-callback\",\n\n            requestInterceptor: function(request) {\n                request.headers['X-CSRF-TOKEN'] = '';\n                return request;\n            },\n\n            presets: [\n                SwaggerUIBundle.presets.apis,\n                SwaggerUIStandalonePreset\n            ],\n\n            plugins: [\n                SwaggerUIBundle.plugins.DownloadUrl\n            ],\n\n            layout: \"StandaloneLayout\",\n            docExpansion : \"none\",\n            deepLinking: true,\n            filter: true,\n            persistAuthorization: \"false\",\n\n        })\n\n        window.ui = ui\n\n            }\n</script>\n</body>\n</html>\n"
+      tags:
+        - Endpoints
+      security: []
+  /api/oauth2-callback:
+    get:
+      summary: 'Display Oauth2 callback pages.'
+      operationId: displayOauth2CallbackPages
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "<!doctype html>\n<html lang=\"en-US\">\n<head>\n    <title>Swagger UI: OAuth2 Redirect</title>\n</head>\n<body>\n<script>\n    'use strict';\n    function run () {\n        var oauth2 = window.opener.swaggerUIRedirectOauth2;\n        var sentState = oauth2.state;\n        var redirectUrl = oauth2.redirectUrl;\n        var isValid, qp, arr;\n\n        if (/code|token|error/.test(window.location.hash)) {\n            qp = window.location.hash.substring(1).replace('?', '&');\n        } else {\n            qp = location.search.substring(1);\n        }\n\n        arr = qp.split(\"&\");\n        arr.forEach(function (v,i,_arr) { _arr[i] = '\"' + v.replace('=', '\":\"') + '\"';});\n        qp = qp ? JSON.parse('{' + arr.join() + '}',\n                function (key, value) {\n                    return key === \"\" ? value : decodeURIComponent(value);\n                }\n        ) : {};\n\n        isValid = qp.state === sentState;\n\n        if ((\n          oauth2.auth.schema.get(\"flow\") === \"accessCode\" ||\n          oauth2.auth.schema.get(\"flow\") === \"authorizationCode\" ||\n          oauth2.auth.schema.get(\"flow\") === \"authorization_code\"\n        ) && !oauth2.auth.code) {\n            if (!isValid) {\n                oauth2.errCb({\n                    authId: oauth2.auth.name,\n                    source: \"auth\",\n                    level: \"warning\",\n                    message: \"Authorization may be unsafe, passed state was changed in server. The passed state wasn't returned from auth server.\"\n                });\n            }\n\n            if (qp.code) {\n                delete oauth2.state;\n                oauth2.auth.code = qp.code;\n                oauth2.callback({auth: oauth2.auth, redirectUrl: redirectUrl});\n            } else {\n                let oauthErrorMsg;\n                if (qp.error) {\n                    oauthErrorMsg = \"[\"+qp.error+\"]: \" +\n                        (qp.error_description ? qp.error_description+ \". \" : \"no accessCode received from the server. \") +\n                        (qp.error_uri ? \"More info: \"+qp.error_uri : \"\");\n                }\n\n                oauth2.errCb({\n                    authId: oauth2.auth.name,\n                    source: \"auth\",\n                    level: \"error\",\n                    message: oauthErrorMsg || \"[Authorization failed]: no accessCode received from the server.\"\n                });\n            }\n        } else {\n            oauth2.callback({auth: oauth2.auth, token: qp, isValid: isValid, redirectUrl: redirectUrl});\n        }\n        window.close();\n    }\n\n    if (document.readyState !== 'loading') {\n        run();\n    } else {\n        document.addEventListener('DOMContentLoaded', function () {\n            run();\n        });\n    }\n</script>\n</body>\n</html>\n"
+      tags:
+        - Endpoints
+      security: []
   /api/v1/login:
     post:
       summary: ''
@@ -26,7 +60,7 @@ paths:
                 email:
                   type: string
                   description: 'Must be a valid email address. Must be at least 5 characters. Must not be greater than 20 characters.'
-                  example: xander02@example.com
+                  example: rosalee35@example.org
                 password:
                   type: string
                   description: ''
@@ -54,15 +88,15 @@ paths:
                 name:
                   type: string
                   description: 'Must be at least 3 characters. Must not be greater than 255 characters.'
-                  example: uswydb
+                  example: zlvjbiumemrvinyf
                 email:
                   type: string
                   description: 'Must be a valid email address. Must be at least 5 characters.'
-                  example: ckoch@example.org
+                  example: angus35@example.org
                 password:
                   type: string
                   description: 'Must contain only letters and numbers. Must be at least 8 characters. Must not be greater than 255 characters.'
-                  example: "d#ze'4ve<PxVGl<+"
+                  example: 'vPVn;+G?!('
                 image:
                   type: string
                   description: ''
@@ -107,6 +141,189 @@ paths:
       responses: {  }
       tags:
         - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: gxpbasegbkdimbtpoocujudc
+                summary:
+                  type: string
+                  description: ''
+                  example: qui
+                cover_image:
+                  type: string
+                  format: binary
+                  description: 'Must be an image.'
+                imdb_ratings:
+                  type: string
+                  description: ''
+                  example: dolor
+                pdf_download_link:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: juld
+                publish_status:
+                  type: string
+                  description: ''
+                  example: dolorum
+                genre_ids:
+                  type: string
+                  description: 'Must be a valid JSON string.'
+                  example: '["vel","voluptas"]'
+                tag_ids:
+                  type: string
+                  description: 'Must be a valid JSON string.'
+                  example: '["possimus","laboriosam"]'
+                author_ids:
+                  type: string
+                  description: 'Must be a valid JSON string.'
+                  example: '["quisquam","eum"]'
+              required:
+                - title
+                - summary
+                - cover_image
+                - imdb_ratings
+                - pdf_download_link
+                - publish_status
+                - genre_ids
+                - tag_ids
+                - author_ids
+      security: []
+  /api/v1/movies/list:
+    get:
+      summary: ''
+      operationId: getApiV1MoviesList
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: number
+                  description: ''
+                  example: 7140305.1216435
+                limit:
+                  type: number
+                  description: ''
+                  example: 4437.64429708
+                search_key:
+                  type: string
+                  description: ''
+                  example: sint
+                genre_id:
+                  type: string
+                  description: ''
+                  example: null
+                sort_type:
+                  type: string
+                  description: ''
+                  example: desc
+                  enum:
+                    - desc
+                    - asc
+                sort_by:
+                  type: string
+                  description: ''
+                  example: imdb_rating
+                  enum:
+                    - id
+                    - name
+                    - release_date
+                    - imdb_rating
+                    - position
+                    - popularity
+                    - updated_at
+              required:
+                - page
+                - limit
+      security: []
+  /api/v1/movies/update:
+    post:
+      summary: ''
+      operationId: postApiV1MoviesUpdate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: xwvq
+                summary:
+                  type: string
+                  description: ''
+                  example: ullam
+                imdb_ratings:
+                  type: string
+                  description: ''
+                  example: officia
+                publish_status:
+                  type: string
+                  description: ''
+                  example: velit
+                genre_ids:
+                  type: string
+                  description: 'Must be a valid JSON string.'
+                  example: '["qui","quam"]'
+                tag_ids:
+                  type: string
+                  description: 'Must be a valid JSON string.'
+                  example: '["similique","aut"]'
+                author_ids:
+                  type: string
+                  description: 'Must be a valid JSON string.'
+                  example: '["rerum","ullam"]'
+              required:
+                - title
+                - summary
+                - imdb_ratings
+                - publish_status
+                - genre_ids
+                - tag_ids
+                - author_ids
+      security: []
+  /api/v1/movies/destory:
+    delete:
+      summary: ''
+      operationId: deleteApiV1MoviesDestory
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
       security: []
   /api/v1/authors/create:
     post:
@@ -127,13 +344,118 @@ paths:
                 name:
                   type: string
                   description: 'Must be at least 3 characters. Must not be greater than 255 characters.'
-                  example: urfxkzbxlbqfr
+                  example: uhwl
                 image:
                   type: string
                   description: ''
                   example: null
               required:
                 - name
+      security: []
+  /api/v1/genres/create:
+    post:
+      summary: ''
+      operationId: postApiV1GenresCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be at least 3 characters. Must not be greater than 255 characters.'
+                  example: seudddxukegppcbfcaxizru
+                image:
+                  type: string
+                  description: ''
+                  example: null
+              required:
+                - name
+      security: []
+  /api/v1/tags/create:
+    post:
+      summary: ''
+      operationId: postApiV1TagsCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must be at least 3 characters. Must not be greater than 255 characters.'
+                  example: wauxsofugfuhy
+              required:
+                - name
+      security: []
+  /api/v1/comments/create:
+    post:
+      summary: ''
+      operationId: postApiV1CommentsCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                movie_id:
+                  type: string
+                  description: ''
+                  example: veritatis
+                comment:
+                  type: string
+                  description: ''
+                  example: et
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: odell65@example.net
+              required:
+                - movie_id
+                - comment
+                - email
+      security: []
+  /api/v1/comments/list:
+    get:
+      summary: ''
+      operationId: getApiV1CommentsList
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
       security: []
 tags:
   -

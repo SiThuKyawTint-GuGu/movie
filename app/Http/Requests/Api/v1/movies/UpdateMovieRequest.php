@@ -4,12 +4,10 @@ namespace App\Http\Requests\Api\v1\movies;
 
 use App\Rules\ValidateTagIds;
 use App\Rules\ValidateGenreIds;
-use Illuminate\Validation\Rule;
 use App\Rules\ValidateAuthorIds;
-use App\Enums\MoviePublishStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMovieRequest extends FormRequest
+class UpdateMovieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,14 +26,11 @@ class StoreMovieRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
             'title'             => 'required|string|max:255',
             'summary'           => 'required|string',
-            'cover_image'       => 'required|image',
             'imdb_ratings'      => 'required|string',
-            'pdf_download_link' => 'required|string|max:255',
-            'publish_status'    => 'required',
+            'publish_status'    => ['required'],
             'genre_ids'         => ['required', 'json', new ValidateGenreIds()],
             'tag_ids'           => ['required', 'json', new ValidateTagIds()],
             'author_ids'        => ['required', 'json', new ValidateAuthorIds()],

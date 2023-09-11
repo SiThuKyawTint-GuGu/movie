@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class MovieGenrePivot extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'genre_id', 'movie_id'
+    ];
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\v1\tag;
+namespace App\Http\Requests\Api\v1\comment;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTagRequest extends FormRequest
+class UpdateCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,9 @@ class UpdateTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'     => 'required|min:3|max:255',
+            'movie_id' => 'required|exists:movies,id',
+            'comment'  => 'required|string',
+            'email'    => 'sometimes|required|email'
         ];
     }
 }

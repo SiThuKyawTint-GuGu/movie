@@ -23,7 +23,7 @@ class UpdateAuthorRequest extends FormRequest
     {
         return [
             'name'     => 'required|min:3|max:255',
-            'image'    => 'nullable|mimes:jpg,png,webp',
+            'image'    => 'nullable',
         ];
     }
 }
